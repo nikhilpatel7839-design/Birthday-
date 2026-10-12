@@ -1,12 +1,6 @@
 import Link from 'next/link';
 import { AppHeader } from '@/components/AppHeader';
 
-const stats = [
-  ['Websites', '24'],
-  ['Published', '15'],
-  ['Customer access', '8']
-];
-
 export default function DashboardPage() {
   return (
     <>
@@ -23,7 +17,11 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-          {stats.map(([label, value]) => (
+          {[
+            ['Websites', '24'],
+            ['Published', '15'],
+            ['Customer access', '8']
+          ].map(([label, value]) => (
             <div key={label} className="rounded-3xl border border-rose-100 bg-white p-6 shadow-card">
               <p className="text-sm text-ink/70">{label}</p>
               <p className="mt-2 text-3xl font-display text-ink">{value}</p>
@@ -35,7 +33,7 @@ export default function DashboardPage() {
           <div className="rounded-3xl border border-rose-100 bg-white p-6 shadow-card">
             <h2 className="text-xl font-semibold text-ink">Recent activity</h2>
             <ul className="mt-6 space-y-4">
-              <li className="border-b border-rose-50 pb-3 text-sm text-ink/75">Published Maya's birthday page</li>
+              <li className="border-b border-rose-50 pb-3 text-sm text-ink/75">Published Maya&apos;s birthday page</li>
               <li className="border-b border-rose-50 pb-3 text-sm text-ink/75">Updated the anniversary gallery</li>
               <li className="text-sm text-ink/75">Invited new customer for a friendship page</li>
             </ul>

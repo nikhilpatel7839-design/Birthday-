@@ -23,7 +23,7 @@ export default function AdminWebsitesPage() {
             <Link key={title} href={`/admin/websites/${slug}`} className="rounded-3xl border border-rose-100 bg-white p-5 shadow-card">
               <div className="flex items-center justify-between">
                 <span className="rounded-full bg-rose-100 px-3 py-1 text-xs uppercase tracking-[0.2em] text-rose-700">{status}</span>
-                <span className="text-xs text-ink/60">#{Math.random().toString(36).slice(2, 6)}</span>
+                <span className="text-xs text-ink/60">#demo</span>
               </div>
               <h3 className="mt-5 font-display text-2xl text-ink">{title}</h3>
               <p className="mt-2 text-sm text-ink/70">/p/{slug}</p>

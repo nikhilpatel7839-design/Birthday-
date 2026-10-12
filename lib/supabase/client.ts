@@ -1,7 +1,5 @@
-import { createBrowserClient } from '@supabase/ssr';
-
 export function createSupabaseBrowserClient() {
-  return createBrowserClient(
+  return require('@supabase/ssr').createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
   );

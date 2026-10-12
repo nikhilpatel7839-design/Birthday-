@@ -1,5 +1,5 @@
-import { AppHeader } from '@/components/AppHeader';
 import { EditorStatus } from '@/components/EditorStatus';
+import { AppHeader } from '@/components/AppHeader';
 
 export default function EditPage() {
   return (
