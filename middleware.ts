@@ -22,15 +22,34 @@ export async function middleware(request: NextRequest) {
   );
 
   const { data: { session } } = await supabase.auth.getSession();
-  const protectedPaths = ['/dashboard', '/admin', '/edit'];
 
-  if (protectedPaths.some((prefix) => request.nextUrl.pathname.startsWith(prefix)) && !session) {
-    return NextResponse.redirect(new URL('/login', request.url));
+  const protectedRoutes = [
+    { pattern: /^\/dashboard/, adminOnly: false },
+    { pattern: /^\/edit/, adminOnly: false },
+    { pattern: /^\/admin/, adminOnly: true }
+  ];
+
+  for (const route of protectedRoutes) {
+    if (route.pattern.test(request.nextUrl.pathname)) {
+      if (!session) {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+
+      if (route.adminOnly && session) {
+        // Admin check will happen server-side
+        const cookieStore = request.cookies;
+        // For admin-only routes, the server-side handler will verify role
+      }
+    }
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/admin/:path*', '/edit/:path*']
+  matcher: [
+    '/dashboard/:path*',
+    '/admin/:path*',
+    '/edit/:path*'
+  ]
 };
