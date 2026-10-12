@@ -12,10 +12,8 @@ export async function getAuthenticatedUser() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet: { name: string; value: string; options: any }[]) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-          } catch {}
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
         }
       }
     }
@@ -26,31 +24,23 @@ export async function getAuthenticatedUser() {
   return user;
 }
 
-export async function getProfileRole(userId: string) {
-  const cookieStore = cookies();
+export async function requireAdminAccess() {
+  const user = await getAuthenticatedUser();
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         getAll() {
-          return cookieStore.getAll();
+          return cookies().getAll();
         },
-        setAll(cookiesToSet: { name: string; value: string; options: any }[]) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-          } catch {}
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => cookies().set(name, value, options));
         }
       }
     }
   );
 
-  const { data } = await supabase.from('profiles').select('role').eq('id', userId).single();
-  return data?.role ?? 'customer';
-}
-
-export async function requireAdminAccess() {
-  const user = await getAuthenticatedUser();
-  const role = await getProfileRole(user.id);
-  if (role !== 'admin') redirect('/dashboard');
+  const { data } = await supabase.from('profiles').select('role').eq('id', user.id).single();
+  if (!data || data.role !== 'admin') redirect('/dashboard');
 }

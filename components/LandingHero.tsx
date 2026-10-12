@@ -24,8 +24,9 @@ export function LandingHero() {
               </Link>
             </div>
           </div>
+
           <div className="relative">
-            <div className="absolute inset-0 -rotate-6 rounded-[2rem] bg-lilac/50" />
+            <div className="absolute inset-0 -rotate-6 rounded-[2rem] bg-lilac/60" />
             <div className="relative rounded-[2rem] border border-rose-100 bg-white p-5 shadow-paper">
               <div className="rounded-[1.5rem] bg-gradient-to-br from-[#f8dfe9] via-[#fffaf3] to-[#f5dfd8] p-6">
                 <div className="mb-6 flex items-center justify-between">

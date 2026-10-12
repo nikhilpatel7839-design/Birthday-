@@ -10,8 +10,7 @@ export function EditorStatus({ saving, published, error }: { saving: boolean; pu
             {saving ? 'Saving draft…' : published ? 'Published successfully' : 'Draft changes pending'}
           </p>
         </div>
-        <span className={saving ? 'bg-amber-200 text-amber-900' : 'bg-emerald-200 text-emerald-900'}
-          className="rounded-full px-3 py-1 text-xs font-medium">
+        <span className={saving ? 'rounded-full bg-amber-200 px-3 py-1 text-xs font-medium text-amber-900' : 'rounded-full bg-emerald-200 px-3 py-1 text-xs font-medium text-emerald-900'}>
           {error ? 'Error' : saving ? 'Saving' : published ? 'Live' : 'Draft'}
         </span>
       </div>
